@@ -41,10 +41,22 @@ Ejecutar todos los tests:
 npm test
 ```
 
+Ejecutar solo los casos funcionales y E2E aprobados:
+
+```powershell
+npm run test:functional
+```
+
 Ejecutar la suite E2E:
 
 ```powershell
 npm run test:e2e
+```
+
+Ejecutar las pruebas de hallazgos conocidos:
+
+```powershell
+npm run test:audit
 ```
 
 Ejecutar con navegador visible:
@@ -84,6 +96,10 @@ npm run report
 
 - E2E-01: flujo completo de compra desde el login hasta la confirmacion.
 - E2E-02: gestion de varios productos y ordenamiento del inventario.
+
+## Hallazgos de auditoria
+
+- AUDIT-SD-001: `problem_user` muestra la misma imagen para los seis productos del inventario. La prueba esta marcada como fallo esperado y conserva el comportamiento como evidencia de un defecto observable.
 
 ## Evidencias
 

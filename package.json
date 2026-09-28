@@ -4,8 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
+    "test:functional": "playwright test --grep-invert AUDIT-SD-001",
     "test:headed": "playwright test --headed",
     "test:e2e": "playwright test tests/e2e",
+    "test:audit": "playwright test tests/audit",
     "report": "playwright show-report"
   },
   "keywords": [],
