@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
+    "test:tc": "playwright test tests/login tests/products tests/cart tests/checkout tests/navigation",
     "test:functional": "playwright test --grep-invert AUDIT-SD-001",
     "test:headed": "playwright test --headed",
     "test:e2e": "playwright test tests/e2e",

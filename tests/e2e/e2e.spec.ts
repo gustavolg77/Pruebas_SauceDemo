@@ -76,6 +76,8 @@ test(
 
   const checkoutPage = new CheckoutPage(page);
   await checkoutPage.expectInformationStep();
+  await checkoutPage.continueEmpty();
+  await checkoutPage.expectError('Error: First Name is required');
   await checkoutPage.continueWith(
     checkoutData.firstName,
     checkoutData.lastName,
@@ -111,10 +113,15 @@ test(
 
   await cartPage.continueShopping();
   await productsPage.expectLoaded();
+  await productsPage.selectSort('hilo');
+
+  const descendingPrices = await productsPage.prices();
+  expect(descendingPrices).toEqual([...descendingPrices].sort((a, b) => b - a));
+
   await productsPage.selectSort('lohi');
 
-  const prices = await productsPage.prices();
-    expect(prices).toEqual([...prices].sort((a, b) => a - b));
+  const ascendingPrices = await productsPage.prices();
+  expect(ascendingPrices).toEqual([...ascendingPrices].sort((a, b) => a - b));
   },
 );
 

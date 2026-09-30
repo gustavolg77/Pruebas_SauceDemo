@@ -41,6 +41,12 @@ Ejecutar todos los tests:
 npm test
 ```
 
+Ejecutar solo los 12 casos funcionales, sin smoke ni E2E:
+
+```powershell
+npm run test:tc
+```
+
 Ejecutar solo los casos funcionales y E2E aprobados:
 
 ```powershell
