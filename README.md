@@ -53,6 +53,12 @@ Ejecutar la suite E2E:
 npm run test:e2e
 ```
 
+Ejecutar los E2E en vivo, mostrando el navegador:
+
+```powershell
+$env:PW_SLOW_MO='700'; npm run demo:e2e
+```
+
 Ejecutar las pruebas de hallazgos conocidos:
 
 ```powershell
@@ -96,6 +102,7 @@ npm run report
 
 - E2E-01: flujo completo de compra desde el login hasta la confirmacion.
 - E2E-02: gestion de varios productos y ordenamiento del inventario.
+- E2E-03: acceso, detalle de producto, navegacion y cierre de sesion.
 
 ## Hallazgos de auditoria
 

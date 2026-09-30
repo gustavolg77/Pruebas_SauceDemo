@@ -11,6 +11,10 @@ test('TC-SD-001: iniciar sesión con credenciales válidas', async ({ page }) =>
   await expect(page.getByText('Products', { exact: true })).toBeVisible();
   await expect(page.locator('.inventory_list')).toBeVisible();
 });
+///Resultado Esperado: 
+// El sistema debe autenticar al usuario y mostrar
+//  la página de productos de SauceDemo, permitiendo continuar con 
+// las operaciones disponibles. 
 
 test('TC-SD-002: rechazar el acceso de un usuario bloqueado', async ({ page }) => {
   await page.goto('/');
@@ -25,3 +29,7 @@ test('TC-SD-002: rechazar el acceso de un usuario bloqueado', async ({ page }) =
   ).toBeVisible();
   await expect(page.getByPlaceholder('Username')).toBeVisible();
 });
+///Resultado Esperado:
+//  El sistema debe impedir el acceso del usuario bloqueado
+//  y mostrar un mensaje informativo indicando que el usuario
+//  no puede iniciar sesión. 

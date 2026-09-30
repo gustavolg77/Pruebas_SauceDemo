@@ -60,3 +60,31 @@ test('E2E-02: gestionar varios productos y ordenar el inventario', async ({ page
   const prices = await productsPage.prices();
   expect(prices).toEqual([...prices].sort((a, b) => a - b));
 });
+
+test('E2E-03: validar acceso, navegacion y cierre de sesion', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.open();
+
+  await loginPage.login(users.lockedOut.username, users.lockedOut.password);
+  await expect(
+    page.getByText('Epic sadface: Sorry, this user has been locked out.', { exact: true }),
+  ).toBeVisible();
+
+  await loginPage.login(users.standard.username, users.standard.password);
+  const productsPage = new ProductsPage(page);
+  await productsPage.expectLoaded();
+  await productsPage.openProduct(products.backpack);
+  await expect(page.locator('.inventory_details_name')).toHaveText(products.backpack);
+
+  await page.getByRole('button', { name: 'Back to products' }).click();
+  await productsPage.expectLoaded();
+  await productsPage.openCart();
+
+  const cartPage = new CartPage(page);
+  await cartPage.expectLoaded();
+  await cartPage.continueShopping();
+  await productsPage.expectLoaded();
+  await productsPage.openMenu();
+  await page.getByText('Logout', { exact: true }).click();
+  await loginPage.expectVisible();
+});
