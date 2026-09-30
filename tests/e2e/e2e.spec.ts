@@ -56,7 +56,14 @@ async function loginAsStandardUser(page: Page): Promise<ProductsPage> {
   return productsPage;
 }
 
-test('E2E-01: completar una compra desde el login hasta la confirmación', async ({ page }) => {
+test(
+  'E2E-01 [TC-SD-001, TC-SD-003, TC-SD-005, TC-SD-011]: completar una compra',
+  async ({ page }, testInfo) => {
+    testInfo.annotations.push({
+      type: 'traceability',
+      description: 'Cubre TC-SD-001, TC-SD-003, TC-SD-005 y TC-SD-011',
+    });
+
   const productsPage = await loginAsStandardUser(page);
   await productsPage.addProduct(products.backpack);
   await expect(productsPage.cartBadge).toHaveText('1');
@@ -76,10 +83,18 @@ test('E2E-01: completar una compra desde el login hasta la confirmación', async
   );
   await checkoutPage.expectOverview();
   await checkoutPage.finish();
-  await checkoutPage.expectConfirmation();
-});
+    await checkoutPage.expectConfirmation();
+  },
+);
 
-test('E2E-02: gestionar varios productos y ordenar el inventario', async ({ page }) => {
+test(
+  'E2E-02 [TC-SD-003, TC-SD-004, TC-SD-006, TC-SD-007, TC-SD-010]: gestionar carrito',
+  async ({ page }, testInfo) => {
+    testInfo.annotations.push({
+      type: 'traceability',
+      description: 'Cubre TC-SD-003, TC-SD-004, TC-SD-006, TC-SD-007 y TC-SD-010',
+    });
+
   const productsPage = await loginAsStandardUser(page);
   await productsPage.addProduct(products.backpack);
   await productsPage.addProduct(products.bikeLight);
@@ -99,10 +114,18 @@ test('E2E-02: gestionar varios productos y ordenar el inventario', async ({ page
   await productsPage.selectSort('lohi');
 
   const prices = await productsPage.prices();
-  expect(prices).toEqual([...prices].sort((a, b) => a - b));
-});
+    expect(prices).toEqual([...prices].sort((a, b) => a - b));
+  },
+);
 
-test('E2E-03: validar acceso, navegacion y cierre de sesion', async ({ page }) => {
+test(
+  'E2E-03 [TC-SD-001, TC-SD-002, TC-SD-008, TC-SD-009, TC-SD-012]: acceso y navegacion',
+  async ({ page }, testInfo) => {
+    testInfo.annotations.push({
+      type: 'traceability',
+      description: 'Cubre TC-SD-001, TC-SD-002, TC-SD-008, TC-SD-009 y TC-SD-012',
+    });
+
   const loginPage = new LoginPage(page);
   await loginPage.open();
 
@@ -127,5 +150,6 @@ test('E2E-03: validar acceso, navegacion y cierre de sesion', async ({ page }) =
   await productsPage.expectLoaded();
   await productsPage.openMenu();
   await page.getByText('Logout', { exact: true }).click();
-  await loginPage.expectVisible();
-});
+    await loginPage.expectVisible();
+  },
+);
