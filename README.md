@@ -56,8 +56,10 @@ npm run test:e2e
 Ejecutar los E2E en vivo, mostrando el navegador:
 
 ```powershell
-$env:PW_SLOW_MO='700'; npm run demo:e2e
+$env:DEMO_MODE='1'; $env:PW_SLOW_MO='1200'; npm run demo:e2e
 ```
+
+Con `DEMO_MODE=1`, cada click se resalta temporalmente con un circulo rojo para facilitar la explicacion en vivo.
 
 Ejecutar las pruebas de hallazgos conocidos:
 

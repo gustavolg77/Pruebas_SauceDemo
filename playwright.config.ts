@@ -12,7 +12,11 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     launchOptions: {
-      slowMo: process.env.PW_SLOW_MO ? Number(process.env.PW_SLOW_MO) : 0,
+      slowMo: process.env.PW_SLOW_MO
+        ? Number(process.env.PW_SLOW_MO)
+        : process.env.DEMO_MODE === '1'
+          ? 1200
+          : 0,
     },
   },
   projects: [
